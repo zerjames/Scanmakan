@@ -1,0 +1,24 @@
+# .htaccess
+# Konfigurasi MIME Type untuk ONNX & WebAssembly (WASM) di Apache Server
+AddType application/wasm .wasm
+AddType application/octet-stream .onnx
+AddType application/javascript .js
+
+# Header CORS & Cache (Wajib untuk Safari iOS, Brave, & Caching Model 42MB)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "*"
+    
+    # Cache model ONNX di browser selama 1 tahun agar HP tidak download ulang 42MB setiap buka
+    <FilesMatch "\.(onnx|wasm)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
+# Kompresi Gzip untuk mempercepat download
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/wasm
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+</IfModule>

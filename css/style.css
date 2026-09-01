@@ -1,0 +1,1781 @@
+/* ─────────────────────────────────────────
+   ScanMakan – Premium & Responsive Style
+   ───────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cegah horizontal scroll global */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+:root {
+  --bg: #FBFBF9;
+  /* Soft Creamy Beige */
+  --surface: #FFFFFF;
+  --border: #EEECE8;
+  --text-main: #1C1C1C;
+  --text-muted: #6B6B63;
+  --text-light: #A3A39A;
+  --accent: #2D6A4F;
+  /* Deep Forest Green */
+  --accent-soft: #ECF3F0;
+  --accent-dark: #1B4332;
+  --radius: 24px;
+  --radius-sm: 14px;
+  /* Nutrition Pastel Colors */
+  --c-cal: #FFF1F1;
+  --c-cal-text: #B91C1C;
+  --c-pro: #F0F7FF;
+  --c-pro-text: #1E40AF;
+  --c-fat: #FFFBEB;
+  --c-fat-text: #92400E;
+  --c-carb: #F0FDF4;
+  --c-carb-text: #166534;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(at 0% 0%, #F1F4F0 0, transparent 50%),
+    radial-gradient(at 100% 100%, #EFEBE7 0, transparent 50%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  overflow: hidden;
+}
+
+.header-inner {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+  min-width: 0;       /* bisa menyusut jika ruang sempit */
+  flex-shrink: 1;
+  white-space: nowrap;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;   /* badge tidak boleh menyusut */
+}
+
+/* Teks badge: sembunyikan di mobile, tampilkan di desktop */
+.status-badge .badge-text {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .status-badge .badge-text {
+    display: inline;
+  }
+}
+
+.status-badge.ready {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.status-badge.loading {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.status-badge.error {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: max-width 0.4s ease;
+}
+
+/* App Grid Container */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Sembunyikan default guidelines desktop di mobile, tampilkan guidelines mobile */
+#guidelines-card-desktop {
+  display: none !important;
+}
+#guidelines-card-mobile {
+  display: block;
+}
+
+/* Workspace Layout 2 Kolom */
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Desktop Wide Mode (≥ 900px) — Semua muat 1 layar dan rapi */
+@media (min-width: 900px) {
+  .header-inner {
+    max-width: 1200px;
+    padding: 10px 40px;
+  }
+
+  /* Main: flex column, lebar pas di desktop */
+  .main {
+    max-width: 1200px;
+    padding: 16px 40px 8px;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Workspace Layout: Grid 2 Kolom Independen */
+  .workspace-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .workspace-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .workspace-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Desktop guidelines aktif, mobile guidelines mati */
+  #guidelines-card-desktop {
+    display: block !important;
+  }
+
+  #guidelines-card-mobile {
+    display: none !important;
+  }
+
+  /* Sembunyikan panel Menu yang Bisa Discan di desktop */
+  #supported-menu-section {
+    display: none !important;
+  }
+
+  /* Hero: sangat compact di desktop */
+  .hero-text {
+    text-align: center;
+    margin-bottom: 4px !important;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem !important;
+    margin-bottom: 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-text p {
+    font-size: 0.85rem !important;
+    margin: 0 auto !important;
+  }
+
+  /* Banner profil compact */
+  #profile-setup-banner {
+    padding: 8px 14px !important;
+    margin-bottom: 0 !important;
+    border-radius: 12px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Search bar compact */
+  .main > .panel.shadow-sm:first-of-type {
+    margin-bottom: 0 !important;
+    padding: 10px 18px !important;
+    border-radius: 14px !important;
+  }
+
+  /* ── CAMERA PANEL: flex row (preview kiri | tombol kanan) ── */
+  .workspace-left .panel.shadow-lg {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    min-height: 250px;
+    max-height: 280px;
+  }
+
+  /* Preview mengisi sisi kiri */
+  .workspace-left .preview-wrap {
+    flex: 1;
+    aspect-ratio: unset;
+    min-height: 250px;
+  }
+
+  /* Upload idle compact */
+  .workspace-left .upload-idle {
+    height: 100%;
+    min-height: 250px;
+    padding: 24px;
+    justify-content: center;
+  }
+
+  /* Tombol aksi: sisi kanan, stacked vertikal */
+  .camera-actions {
+    width: 210px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 16px;
+    border-left: 1px solid var(--border);
+    border-top: none;
+    background: var(--bg);
+  }
+
+  /* Semua tombol full width */
+  .camera-actions .btn {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+  }
+
+  /* Log / Tracker card compact & melebar ke bawah */
+  .tracker-card {
+    padding: 20px 24px;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Sembunyikan stripe atas tracker di desktop biar compact */
+  .tracker-card::before {
+    height: 3px;
+  }
+
+  .tracker-header {
+    margin-bottom: 10px !important;
+  }
+
+  .calorie-progress-wrap {
+    padding: 12px 16px !important;
+    margin-bottom: 10px !important;
+    border-radius: 14px !important;
+  }
+
+  .calorie-numbers {
+    margin-bottom: 4px !important;
+  }
+
+  .panel-result {
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  /* Footer compact di desktop */
+  .footer {
+    padding: 12px 20px !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+
+
+
+/* Tablet (600px – 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .header-inner {
+    max-width: 860px;
+  }
+
+  .main {
+    max-width: 860px;
+    padding: 28px 24px;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tombol aksi kamera: 2 kolom di tablet */
+  .camera-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #btnStartCam,
+  #btnCapture,
+  #btnAnalyze {
+    grid-column: 1 / -1;
+  }
+
+  .tracker-card {
+    padding: 28px;
+  }
+}
+
+/* ── CARDS ── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* ── MENU CHIP (KELAS DIDUKUNG AI) ── */
+.menu-chip {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.menu-chip:hover {
+  border-color: #52b788;
+  color: #1e293b;
+  transform: translateY(-1px);
+}
+
+/* ── UPLOAD AREA ── */
+.upload-idle {
+  padding: 60px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-circle {
+  width: 80px;
+  height: 80px;
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.upload-idle h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.upload-idle p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ── PREVIEW ── */
+.preview-wrap {
+  width: 100%;
+  aspect-ratio: 16/10;
+  position: relative;
+  background: #000;
+}
+
+.preview-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #0F172A;
+}
+
+.btn-close-preview {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+/* ── CAMERA ── */
+.camera-zone video {
+  width: 100%;
+  background: #000;
+  display: block;
+}
+
+.camera-actions {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--text-main);
+  color: white;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: var(--bg);
+  border-color: var(--text-light);
+}
+
+/* ── RESULTS ── */
+.panel-result {
+  padding: 20px 24px;
+}
+
+.food-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.food-emoji {
+  font-size: 32px;
+  background: var(--bg);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+
+.food-title h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.confidence-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Portion Selector */
+.portion-box {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.portion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.port-btn {
+  padding: 12px 8px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.port-btn.active {
+  border-color: var(--accent);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.port-btn .p-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.port-btn .p-sub {
+  font-size: 0.65rem;
+  color: var(--text-light);
+}
+
+/* Variation Selector */
+.variation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.var-btn {
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-muted);
+}
+
+.var-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
+}
+
+.var-btn:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Nutrition Grid */
+.nutri-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.nutri-card {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  border: 1.5px solid transparent;
+}
+
+.nutri-card:hover {
+  transform: translateY(-1.5px);
+}
+
+.nutri-card.calories {
+  background: var(--c-cal);
+  border-color: #FECACA;
+}
+
+.nutri-card.calories .n-val {
+  color: var(--c-cal-text);
+}
+
+.nutri-card.protein {
+  background: var(--c-pro);
+  border-color: #DBEAFE;
+}
+
+.nutri-card.protein .n-val {
+  color: var(--c-pro-text);
+}
+
+.nutri-card.fat {
+  background: var(--c-fat);
+  border-color: #FEF3C7;
+}
+
+.nutri-card.fat .n-val {
+  color: var(--c-fat-text);
+}
+
+.nutri-card.carbs {
+  background: var(--c-carb);
+  border-color: #DCFCE7;
+}
+
+.nutri-card.carbs .n-val {
+  color: var(--c-carb-text);
+}
+
+.nutri-card .n-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.nutri-card .n-unit {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nutri-card .n-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.8rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .main {
+    padding: 16px 12px;
+  }
+
+  .panel-result {
+    padding: 24px 16px;
+  }
+
+  .nutri-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nutri-card.calories {
+    grid-column: span 3;
+  }
+
+  .food-emoji {
+    width: 64px;
+    height: 64px;
+    font-size: 36px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-up {
+  animation: slideUp 0.4s cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+/* ─── TOMBOL PROFIL HEADER ─── */
+.btn-profile {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border: 1px solid #C6DDD5;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-profile:hover {
+  background: #D4EAE0;
+}
+
+/* ─── TOMBOL TAMBAH KE LOG ─── */
+.btn-add-log {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 14px rgba(45, 106, 79, 0.35);
+}
+
+.btn-add-log:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.45);
+}
+
+.btn-add-log:disabled {
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
+  cursor: default;
+  transform: none;
+}
+
+/* ─────────────────────────────── */
+/* TRACKER CARD                    */
+/* ─────────────────────────────── */
+.tracker-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tracker-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tracker-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: #F0EFEC;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+/* ── Progress Kalori ── */
+.calorie-progress-wrap {
+  background: linear-gradient(135deg, #F8FDFA 0%, #EEF7F3 100%);
+  border: 1px solid #D4EAE0;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.calorie-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.cal-consumed {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--accent-dark);
+  line-height: 1;
+}
+
+.cal-consumed small {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-left: 3px;
+}
+
+.cal-sep {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.cal-target {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.cal-target small {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 14px;
+  background: #DCEEE7;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
+  background: linear-gradient(90deg, var(--accent), #52B788);
+}
+
+.calorie-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.82rem;
+}
+
+/* ── Ringkasan Makro ── */
+.macro-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.macro-item {
+  background: #F8F7F4;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.macro-item:hover {
+  background: #F0EFEC;
+}
+
+.macro-icon {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.macro-val {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.macro-lbl {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Daftar Makanan ── */
+.food-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-list-header {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.log-empty {
+  text-align: center;
+  padding: 28px 0 12px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.log-empty-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 8px;
+  opacity: 0.4;
+}
+
+.log-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F8F7F4;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 16px;
+  gap: 12px;
+  transition: var(--transition);
+}
+
+.log-item:hover {
+  background: #F0EFEC;
+  border-color: var(--border);
+}
+
+#food-log-items-container {
+  max-height: 215px; /* Tinggi maksimal setara 3 item */
+  overflow-y: auto;
+  padding-right: 4px; /* Ruang untuk scrollbar */
+  scrollbar-width: thin; /* Firefox */
+}
+
+/* Custom scrollbar untuk webkit */
+#food-log-items-container::-webkit-scrollbar {
+  width: 6px;
+}
+#food-log-items-container::-webkit-scrollbar-track {
+  background: #F1F1F0;
+  border-radius: 99px;
+}
+#food-log-items-container::-webkit-scrollbar-thumb {
+  background: #D1D0CB;
+  border-radius: 99px;
+}
+#food-log-items-container::-webkit-scrollbar-thumb:hover {
+  background: #A3A39A;
+}
+
+.log-item-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.log-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.log-item-name {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.log-item-meta {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.log-item-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.log-item-cal {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.log-delete-btn {
+  background: none;
+  border: none;
+  color: #D1D0CB;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.2s;
+  border-radius: 6px;
+}
+
+.log-delete-btn:hover {
+  color: #EF4444;
+  background: #FEF2F2;
+}
+
+/* ─────────────────────────────── */
+/* MODAL KALKULATOR                */
+/* ─────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@media (min-width: 600px) {
+  .modal-overlay {
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+.modal-box {
+  background: var(--surface);
+  border-radius: 28px 28px 0 0;
+  width: 100%;
+  max-width: 520px;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUpModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 600px) {
+  .modal-box {
+    border-radius: var(--radius);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+    animation: none;
+  }
+}
+
+/* Desktop: modal dinamis (1 kolom default, melebar 2 kolom jika ada hasil) */
+@media (min-width: 900px) {
+  .modal-box {
+    max-width: 480px; /* default sempit 1 kolom */
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modal-box.has-results {
+    max-width: 820px; /* melebar saat ada hasil */
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+    padding: 16px 24px 24px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .modal-box.has-results .modal-body {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* Kolom kiri: form input */
+  .modal-form-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Kolom kanan: hasil kalkulasi */
+  #pm-result {
+    display: none; /* sembunyikan jika belum ada hasil */
+    flex: 1;
+    min-width: 0;
+    overflow: hidden; /* hilangkan scrollbar */
+  }
+
+  .modal-box.has-results #pm-result {
+    display: block; /* tampilkan saat ada hasil */
+  }
+
+
+  /* Tombol hitung lebih compact di desktop */
+  .btn-calculate {
+    padding: 12px;
+    font-size: 0.92rem;
+    margin-bottom: 0;
+  }
+
+  /* Desc teks lebih compact */
+  .modal-desc {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+    padding: 8px 12px;
+  }
+
+  /* Form grid gap lebih kecil */
+  .form-grid {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  /* Input compact */
+  .form-group input,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 0.88rem;
+  }
+}
+
+
+@keyframes slideUpModal {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Handle bar untuk mobile */
+.modal-handle {
+  width: 40px;
+  height: 4px;
+  background: #E0DFDA;
+  border-radius: 99px;
+  margin: 12px auto 0;
+}
+
+@media (min-width: 600px) {
+  .modal-handle {
+    display: none;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px 0;
+}
+
+.modal-header h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0EFEC;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.modal-close:hover {
+  background: #E0DFDA;
+  color: var(--text-main);
+}
+
+.modal-body {
+  padding: 16px 24px 32px;
+}
+
+.modal-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  background: #F8F7F4;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+/* ── Form Grid ── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 400px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background: #FAFAF9;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+  background: #fff;
+}
+
+/* ── Tombol Hitung ── */
+.btn-calculate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(45, 106, 79, 0.35);
+  margin-bottom: 4px;
+}
+
+.btn-calculate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(45, 106, 79, 0.45);
+}
+
+/* ── Hasil Kalkulasi ── */
+.calc-result-box {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: slideUp 0.3s ease;
+}
+
+.calc-result-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.calc-card {
+  background: #F8F7F4;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-card-icon {
+  font-size: 1.4rem;
+}
+
+.calc-card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calc-card-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.calc-card-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.calc-card-tdee {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #EEF7F3 0%, #D4EAE0 100%);
+  border: 1px solid #B7D9CA;
+}
+
+.calc-card-tdee .calc-card-label {
+  color: var(--accent);
+}
+
+.calc-card-tdee .calc-card-value {
+  font-size: 1.8rem;
+  color: var(--accent-dark);
+}
+
+.btn-save-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  background: var(--accent-dark);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 4px;
+}
+
+.btn-save-profile:hover {
+  background: #0D2B1E;
+}
+/* ═══════════════════════════════════════════
+   RESPONSIVE MOBILE – Tambahan Lengkap
+   ═══════════════════════════════════════════ */
+
+/* ── Tablet (≤ 768px) ── */
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 12px 16px;
+  }
+
+  .main {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .tracker-card {
+    padding: 20px 18px;
+  }
+
+  .calorie-progress-wrap {
+    padding: 16px;
+  }
+
+  .cal-consumed {
+    font-size: 2rem;
+  }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+
+  /* Header */
+  .header-inner {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 15px;
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+
+  /* Persingkat label tombol profil */
+  .btn-profile {
+    font-size: 0.75rem;
+    padding: 7px 10px;
+  }
+
+  /* Status badge lebih kecil */
+  .status-badge {
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+
+  /* Main */
+  .main {
+    padding: 14px 12px;
+    gap: 14px;
+  }
+
+  /* Camera preview: square on mobile */
+  .preview-wrap {
+    aspect-ratio: 4/3;
+  }
+
+  /* Upload idle lebih compact */
+  .upload-idle {
+    padding: 36px 16px;
+    gap: 8px;
+  }
+
+  .upload-circle {
+    width: 64px;
+    height: 64px;
+  }
+
+  /* Buttons – touch friendly min height */
+  .btn {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+
+  .camera-actions {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  /* Nutrition result */
+  .panel-result {
+    padding: 20px 14px;
+  }
+
+  .food-header {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .food-emoji {
+    width: 56px;
+    height: 56px;
+    font-size: 30px;
+    border-radius: 14px;
+  }
+
+  .food-title h2 {
+    font-size: 1.15rem;
+  }
+
+  .nutri-grid {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .nutri-card {
+    padding: 14px 12px;
+  }
+
+  .nutri-card .n-val {
+    font-size: 1.2rem;
+  }
+
+  /* Tracker card */
+  .tracker-card {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .tracker-title {
+    font-size: 0.92rem;
+  }
+
+  .tracker-date {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .calorie-progress-wrap {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  .cal-consumed {
+    font-size: 1.7rem;
+  }
+
+  .cal-target {
+    font-size: 1rem;
+  }
+
+  .macro-summary {
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .macro-item {
+    padding: 10px 6px;
+    border-radius: 10px;
+  }
+
+  .macro-val {
+    font-size: 0.95rem;
+  }
+
+  .macro-icon {
+    font-size: 1rem;
+  }
+
+  .macro-lbl {
+    font-size: 0.6rem;
+  }
+
+  /* Log items */
+  .log-item {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .log-item-name {
+    font-size: 0.83rem;
+  }
+
+  .log-item-cal {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+  }
+
+  .log-item-icon {
+    font-size: 1.1rem;
+  }
+
+  /* Tambah ke log button */
+  .btn-add-log {
+    padding: 14px;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+
+  /* Modal body */
+  .modal-body {
+    padding: 14px 18px 28px;
+  }
+
+  .modal-header {
+    padding: 14px 18px 0;
+  }
+
+  /* Kalkulator result cards */
+  .calc-result-cards {
+    gap: 8px;
+  }
+
+  .calc-card {
+    padding: 14px 10px;
+  }
+
+  .calc-card-value {
+    font-size: 1.4rem;
+  }
+}
+
+/* ── Sangat Kecil (≤ 360px – entry-level Android) ── */
+@media (max-width: 360px) {
+
+  .btn-profile span,
+  .btn-profile {
+    font-size: 0.7rem;
+    padding: 6px 8px;
+  }
+
+  .cal-consumed {
+    font-size: 1.5rem;
+  }
+
+  .nutri-card .n-val {
+    font-size: 1.05rem;
+  }
+
+  .food-title h2 {
+    font-size: 1rem;
+  }
+}
+
+/* ── Safe Area – notch & home indicator (iPhone/Android) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .modal-box {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ── MANUAL SEARCH BAR ── */
+.search-result-item {
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+  border-bottom: 1px solid #EEECE8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1C1C1C;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: #F8FDFA;
+  color: var(--accent);
+}
+
+.search-result-item .item-emoji-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-result-item .item-cal {
+  font-size: 0.8rem;
+  font-weight: 800;
+  background: var(--c-cal);
+  color: var(--c-cal-text);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
